@@ -1,0 +1,10 @@
+#elasticsearch配置
+elasticsearch:
+  primary:
+    host: 120.48.107.224
+    port: 9201
+    username: username
+    password: password
+  secondary:
+    host: 120.48.107.224
+    port: 9202
