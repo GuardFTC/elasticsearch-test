@@ -21,7 +21,7 @@ class ElasticSearchClientConfigTest {
 
     @Test
     void testCreateIndex() throws IOException {
-        primaryClient.indices().delete(c -> c.index("test_java"));
-        secondaryClient.indices().create(c -> c.index("test_java"));
+        primaryClient.indices().create(c -> c.index("test_java_primary"));
+        secondaryClient.indices().create(c -> c.index("test_java_secondary"));
     }
 }
