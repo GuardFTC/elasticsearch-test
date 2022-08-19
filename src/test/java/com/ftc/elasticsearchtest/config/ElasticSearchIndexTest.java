@@ -153,7 +153,7 @@ class ElasticSearchIndexTest {
                 );
         Assert.isTrue(Boolean.TRUE.equals(createIndexResponse.acknowledged()));
 
-        //3.创建多个别名素银
+        //2.创建多个别名索引
         Map<String, Alias> aliasMap = MapUtil.newHashMap(2);
         aliasMap.put(INDEX_NAME, Alias.of(a -> a));
         aliasMap.put(INDEX_NAME + "_bak", Alias.of(a -> a));
@@ -165,12 +165,12 @@ class ElasticSearchIndexTest {
                 );
         Assert.isTrue(Boolean.TRUE.equals(createIndexResponse.acknowledged()));
 
-        //4.查询索引别名
+        //3.查询索引别名
         GetAliasResponse aliasResponse = secondaryClient
                 .indices()
                 .getAlias(i -> i.index(INDEX_NAME + "_1", INDEX_NAME + "_2"));
 
-        //5.校验索引别名
+        //4.校验索引别名
         Map<String, IndexAliases> result = aliasResponse.result();
         Set<String> aliasNames = result.get(INDEX_NAME + "_1").aliases().keySet();
         Assert.isTrue("[\"test_index\"]".equals(JSONUtil.toJsonStr(aliasNames)));
