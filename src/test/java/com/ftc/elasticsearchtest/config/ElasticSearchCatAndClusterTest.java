@@ -29,10 +29,6 @@ class ElasticSearchCatAndClusterTest {
     @Qualifier("primaryElasticsearchClient")
     private ElasticsearchClient primaryClient;
 
-    @Resource
-    @Qualifier("secondaryElasticsearchClient")
-    private ElasticsearchClient secondaryClient;
-
     @Test
     void testCat() throws IOException {
 
