@@ -57,36 +57,50 @@ public class ElasticSearchClientConfig {
      */
     private ElasticsearchClient getElasticsearchClient(ElasticSearchProperties properties) {
 
-        //1.获取主机和端口
+        //1.获取主机和端口以及超时配置
         String host = properties.getHost();
         Integer port = properties.getPort();
+        Integer connectTimeout = properties.getConnectTimeout();
+        Integer socketTimeout = properties.getSocketTimeout();
+        Integer connectionRequestTimeout = properties.getConnectionRequestTimeout();
 
-        //2.封装客户端初始参数
+        //2.设置客户端IP端口
         RestClientBuilder builder = RestClient.builder(new HttpHost(host, port));
 
-        //3.获取用户名密码
+        //3.设置链接相关参数
+        RestClientBuilder.RequestConfigCallback requestConfigCallback = requestConfigBuilder -> {
+            requestConfigBuilder.setConnectTimeout(connectTimeout);
+            requestConfigBuilder.setSocketTimeout(socketTimeout);
+            requestConfigBuilder.setConnectionRequestTimeout(connectionRequestTimeout);
+            return requestConfigBuilder;
+        };
+
+        //4.设置客户端链接参数
+        builder.setRequestConfigCallback(requestConfigCallback);
+
+        //5.获取用户名密码
         String username = properties.getUsername();
         String password = properties.getPassword();
 
-        //4.用户名密码判空，判定是否需要创建登录凭证
+        //6.用户名密码判空，判定是否需要创建登录凭证
         if (StrUtil.isNotBlank(username) && StrUtil.isNotBlank(password)) {
             final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
 
-            //5.设置用户名密码
+            //7.设置用户名密码
             UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(username, password);
             credentialsProvider.setCredentials(AuthScope.ANY, credentials);
 
-            //6.封装鉴权参数
+            //8.封装鉴权参数
             builder.setHttpClientConfigCallback(httpClientBuilder -> httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider));
         }
 
-        //7.创建Rest客户端
+        //9.创建Rest客户端
         RestClient restClient = builder.build();
 
-        //8.生成Elasticsearch客户端链接
+        //10.生成Elasticsearch客户端链接
         ElasticsearchTransport transport = new RestClientTransport(restClient, new JacksonJsonpMapper());
 
-        //9.生成Elasticsearch客户端并返回
+        //11.生成Elasticsearch客户端并返回
         return new ElasticsearchClient(transport);
     }
 }

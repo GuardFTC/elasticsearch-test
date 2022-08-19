@@ -5,6 +5,12 @@ elasticsearch:
     port: 9201
     username: username
     password: password
+    connect-timeout: 6000
+    socket-timeout: 6000
+    connection-request-timeout: 2000
   secondary:
     host: 120.48.107.224
     port: 9202
+    connect-timeout: 6000
+    socket-timeout: 6000
+    connection-request-timeout: 2000

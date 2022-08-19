@@ -29,4 +29,19 @@ public class ElasticSearchProperties {
      * 密码
      */
     private String password;
+
+    /**
+     * 链接超时时间
+     */
+    private Integer connectTimeout;
+
+    /**
+     * socket链接超时时间
+     */
+    private Integer socketTimeout;
+
+    /**
+     * 请求链接超时时间
+     */
+    private Integer connectionRequestTimeout;
 }
