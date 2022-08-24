@@ -234,8 +234,16 @@ public class ElasticSearchSearchTest {
                 )), SearchStudent.class
         );
         Assert.isTrue(2 == search.hits().hits().size());
-        Assert.isTrue(search.hits().hits().get(0).source().getDes().contains("性感小姐姐"));
-        Assert.isTrue(search.hits().hits().get(1).source().getDes().contains("性感小姐姐"));
+        Assert.isTrue(
+                search.hits().hits().get(0).source().getDes().contains("性感") ||
+                        search.hits().hits().get(0).source().getDes().contains("小姐") ||
+                        search.hits().hits().get(0).source().getDes().contains("姐姐")
+        );
+        Assert.isTrue(
+                search.hits().hits().get(1).source().getDes().contains("性感") ||
+                        search.hits().hits().get(1).source().getDes().contains("小姐") ||
+                        search.hits().hits().get(1).source().getDes().contains("姐姐")
+        );
 
         //4.查询描述中包含性感小姐姐的同学,匹配百分比为100%
         search = secondaryClient.search(s -> s
@@ -247,8 +255,16 @@ public class ElasticSearchSearchTest {
                 )), SearchStudent.class
         );
         Assert.isTrue(2 == search.hits().hits().size());
-        Assert.isTrue(search.hits().hits().get(0).source().getDes().contains("性感小姐姐"));
-        Assert.isTrue(search.hits().hits().get(1).source().getDes().contains("性感小姐姐"));
+        Assert.isTrue(
+                search.hits().hits().get(0).source().getDes().contains("性感") ||
+                        search.hits().hits().get(0).source().getDes().contains("小姐") ||
+                        search.hits().hits().get(0).source().getDes().contains("姐姐")
+        );
+        Assert.isTrue(
+                search.hits().hits().get(1).source().getDes().contains("性感") ||
+                        search.hits().hits().get(1).source().getDes().contains("小姐") ||
+                        search.hits().hits().get(1).source().getDes().contains("姐姐")
+        );
     }
 
     @Test
