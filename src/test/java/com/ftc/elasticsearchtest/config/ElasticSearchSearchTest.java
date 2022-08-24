@@ -597,7 +597,7 @@ public class ElasticSearchSearchTest {
                 .index(INDEX_NAME)
                 .scroll(scroll -> scroll.time("10m"))
                 .sort(sort -> sort.field(f -> f
-                        .field("age")
+                        .field("grade")
                         .order(SortOrder.Asc)
                 ))
                 .size(2), SearchStudent.class
