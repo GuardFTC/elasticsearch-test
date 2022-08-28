@@ -120,7 +120,7 @@ public class ElasticSearchAggregationTest {
 
     @Test
     @SneakyThrows(IOException.class)
-    void term() {
+    void terms() {
 
         //1.根据颜色进行聚合
         SearchResponse<CarOrder> search = primaryClient.search(s -> s
