@@ -399,7 +399,7 @@ public class ElasticSearchAggregationTest {
     @SneakyThrows(IOException.class)
     void sortDeep() {
 
-        //1.统计每个季度，每个厂商黄色汽车销售总额，并且直观看到黄色汽车销售总额高的厂
+        //1.统计每个季度，每个厂商黄色汽车销售总额，并且直观看到黄色汽车销售总额高的厂商
         HashMap<String, SortOrder> sortMaps = MapUtil.newHashMap(1);
         sortMaps.put("totalPrice>yellowTotalPrice", SortOrder.Desc);
         SearchResponse<CarOrder> search = secondaryClient.search(s -> s
