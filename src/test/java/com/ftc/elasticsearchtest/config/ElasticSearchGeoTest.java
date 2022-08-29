@@ -148,7 +148,7 @@ public class ElasticSearchGeoTest {
 
     @Test
     @SneakyThrows(IOException.class)
-    void geiDistance() {
+    void geoDistance() {
 
         //1.以北京为圆心，获取2000km内的省份，理论上应该返回北京，山东，湖北，以及湖南4个省份
         SearchResponse<Omission> search = secondaryClient.search(s -> s
@@ -241,7 +241,7 @@ public class ElasticSearchGeoTest {
 
     @Test
     @SneakyThrows(IOException.class)
-    void geoHashGrid() {
+    void aggregationGeoHashGrid() {
 
         //1.网格聚合，指定geoHash长度为1
         SearchResponse<Omission> search = primaryClient.search(s -> s
@@ -260,7 +260,7 @@ public class ElasticSearchGeoTest {
 
     @Test
     @SneakyThrows(IOException.class)
-    void geoBounds() {
+    void aggregationGeoBounds() {
 
         //1.得到一个可以包含所有已存储数据的矩形
         SearchResponse<Omission> search = primaryClient.search(s -> s
